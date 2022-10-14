@@ -17,6 +17,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -28,6 +29,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        ArrayList<String> listilla = new ArrayList<String>();
+        listilla.add("Item1");
+        listilla.add("Item2");
 
         ExecutorService executor = Executors.newSingleThreadExecutor();
         Handler handler = new Handler(Looper.getMainLooper());
@@ -43,12 +49,12 @@ public class MainActivity extends AppCompatActivity {
                     Log.i("Myapp", res);
                     //Background work here
 
-                /*handler.post(new Runnable() {
+                handler.post(new Runnable() {
                     @Override
                     public void run() {
                         //UI Thread work here
                     }
-                });*/
+                });
                 }
                 });
                 }
