@@ -8,7 +8,10 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -35,6 +38,11 @@ public class MainActivity extends AppCompatActivity {
         listilla.add("Item1");
         listilla.add("Item2");
 
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,listilla);
+        ListView lv = findViewById(R.id.listView);
+        lv.setAdapter(adapter);
+        TextView tv = findViewById(R.id.textView);
+
         ExecutorService executor = Executors.newSingleThreadExecutor();
         Handler handler = new Handler(Looper.getMainLooper());
         Button b1 = (Button) findViewById(R.id.button);
@@ -52,7 +60,9 @@ public class MainActivity extends AppCompatActivity {
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        //UI Thread work here
+                        tv.append(res+"\n");
+                        listilla.add(res);
+                        adapter.notifyDataSetChanged();
                     }
                 });
                 }
